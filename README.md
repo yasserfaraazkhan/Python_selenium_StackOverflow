@@ -21,3 +21,27 @@ You can set the base url with `--baseUrl` cli argument (if running your app agai
 ```
 py.test --base-url "https://any_test_env_url_to_override"
 ```
+## Without docker
+### Running different test files in different browsers
+`pytest --B firefox` # default is chrome
+
+### Running in headless mode
+`pytest --chromeOption=headless` # we can pass more chrome options
+
+### To run test in parallel:
+`pytest -n 2` # 2 is number of browsers
+
+## Running the tests with docker
+
+There is a make Makefile present to run the whole test suite with ``make test``. You can run `make build-no-cache` to completely rebuild the container.
+
+### Developing tests
+
+Running `make dev` will start a shell inside the Docker container with everything set up for you to run the tests.
+
+Then either run tests inside the container or with docker compose you can select to run only specific files or tests
+
+```
+pytest test_search_stackoverflow.py
+docker-compose run e2e pytest test_search_stackoverflow.py
+```
